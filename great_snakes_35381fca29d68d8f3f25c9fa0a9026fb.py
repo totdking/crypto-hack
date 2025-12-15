@@ -76,6 +76,25 @@ flag_bytes = xor(key1_bytes, flag_xor_132_bytes, key2_xor_key3_bytes)
 
 
 # 9 Some dumb bitch ass puzzle
-some = "73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d"
+some = "73 62 69 60 64 7f 6b 20 68 21 20 4f 21 25 4f 7d 69 4f 76 24 66 20 65 62 21 27 23 4f 72 69 27 75 6d "
 some_byte = bytes.fromhex(some)
-print(some_byte.decode("utf-8"))
+
+def loop_around (sing: bytes):
+    for i in range(128):  # Loop through all ASCII values (0-127)
+        result = bytes([b ^ i for b in sing])
+        try:
+            decoded = result.decode('utf-8')
+            if decoded.startswith("crypto"):
+                print(f"Key {i}: {decoded}")
+        except UnicodeDecodeError:
+            pass  # Skip non-decodable results
+
+loop_around(some_byte)
+"""16 is the number"""
+# xor_res = xor(some_byte, 16)
+# Fucking amateur
+
+# 10 Another bitch ass xor puzzle
+puzz = "0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104"
+puzz_byte = bytes.fromhex(puzz)
+# print(puzz_byte.decode("utf-8"))
