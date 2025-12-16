@@ -8,6 +8,6 @@ act:
 	@. venv/bin/activate
 
 run: 
-	@venv/bin/python3 great_snakes_35381fca29d68d8f3f25c9fa0a9026fb.py
+	@venv/bin/python3 snake.py
 de: 
 	@deactivate

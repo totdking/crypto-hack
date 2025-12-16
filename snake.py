@@ -69,9 +69,13 @@ key2_xor_key3_bytes = bytes.fromhex(key2_xor_key3)
 
 flag_xor_132 = '04ee9855208a2cd59091d04767ae47963170d1660df7f56f5faf'
 flag_xor_132_bytes = bytes.fromhex(flag_xor_132)
+
 # 1^2^3^flag = b
 # flag = 1^2^3^b
 flag_bytes = xor(key1_bytes, flag_xor_132_bytes, key2_xor_key3_bytes)
+flag = "".join([hex(b) for b in flag_bytes])
+# 0x630x720x790x700x740x6f0x7b0x780x300x720x5f0x690x350x5f0x610x730x730x300x630x310x610x740x310x760x330x7d
+# print(flag)
 # print(flag_bytes.decode("utf-8"))
 
 
@@ -89,12 +93,22 @@ def loop_around (sing: bytes):
         except UnicodeDecodeError:
             pass  # Skip non-decodable results
 
-loop_around(some_byte)
+# loop_around(some_byte)
 """16 is the number"""
 # xor_res = xor(some_byte, 16)
 # Fucking amateur
 
+
 # 10 Another bitch ass xor puzzle
 puzz = "0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104"
 puzz_byte = bytes.fromhex(puzz)
-# print(puzz_byte.decode("utf-8"))
+def find_key(some: bytes):
+    for i in range(128):
+        result = bytes([b ^ i for b in some])
+        try: 
+            decode = result.decode("utf-8")
+            # if decode.startswith("crypto"):
+            print(f"Key {i}: {decode}")
+        except UnicodeDecodeError:
+            pass
+# find_key(puzz_byte)
