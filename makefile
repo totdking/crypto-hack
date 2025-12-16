@@ -8,6 +8,6 @@ act:
 	@. venv/bin/activate
 
 run: 
-	@venv/bin/python3 snake.py
+	@venv/bin/python3 modular.py
 de: 
 	@deactivate

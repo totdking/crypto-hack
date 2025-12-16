@@ -102,13 +102,6 @@ def loop_around (sing: bytes):
 # 10 Another bitch ass xor puzzle
 puzz = "0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104"
 puzz_byte = bytes.fromhex(puzz)
-def find_key(some: bytes):
-    for i in range(128):
-        result = bytes([b ^ i for b in some])
-        try: 
-            decode = result.decode("utf-8")
-            # if decode.startswith("crypto"):
-            print(f"Key {i}: {decode}")
-        except UnicodeDecodeError:
-            pass
-# find_key(puzz_byte)
+
+key = xor(puzz_byte[:7], 'crypto{') + xor(puzz_byte[-1], '}')
+print(xor(puzz_byte, key).decode("utf-8"))
