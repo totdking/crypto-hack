@@ -7,7 +7,7 @@ def gcd(a: int, b: int) -> int:
 # gcd(26513, 32321)
 
 
-# 2 get eea inverse
+# 2 get eea inverse of a value in a prime field
 def eea_mon_inv(a: int, m: int) -> int:
     # coefficient of a in gcd(a,b) b being prime field
     old_t, new_t = 1, 0
@@ -46,7 +46,7 @@ def get_a_b (p: int, q: int) -> (int, int, int):
 # print(f"A coefficient:{a}\nB coefficient:{b}\nResult/Gcd:{r}")
 
 
-# 4 finding the mod pow
+# 4 finding the mod pow of a number in a finite field
 def mod_pow(base: int, pow: int, p: int) -> int:
     # if prime is 1, the result of any thing is zero because the only value in a prime field of 1 is zero
     if p == 1:
@@ -69,4 +69,30 @@ def mod_pow(base: int, pow: int, p: int) -> int:
 # 5 
 a = 3
 p = 13
-print(mod_pow(a, p-2, p))
+# print(mod_pow(a, p-2, p))
+
+# 6 slow and is 0(n) is as long as the size of P
+def root_find(square: int, p: int) -> int:
+    for i in range(p):
+        if (i * i) % p == square:
+            return i
+    return p
+
+# print(root_find(6, 29))
+
+arr = [14, 6, 11]
+def valid_square(arr: [int], p: int):
+    # if i^2 mod(p) = arr[j]
+    for i in range(p):
+        for j in range(len(arr)):
+            if mod_pow(i, 2, p) == arr[j]:
+                print(f"value {arr[j]} is a square of {i}")
+    print("No square found")
+
+valid_square(arr, 29)
+p = 10152403517453989048540857567108
+        5261788758965189060164484385690801466167356667036677932998889725
+        47658242173878850073873850313435
+        61581972474738502735653492495738
+        67251280253564698939768700489401
+        960767007716413932851838937641880157263936985954881657889497583485535527613578457628399173971810541670838543309159139
