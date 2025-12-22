@@ -1,4 +1,5 @@
 use crypto_bigint::U1024;
+use num_bigint::BigUint;
 mod modular_arm;
 fn main() {
     // The large prime p represented as 16 u64 words (big-endian/MSB first)
@@ -33,11 +34,13 @@ fn main() {
             let flag = if root1 > root2 { root1 } else { root2 };
 
             println!("\n=== RESULTS ===");
-            println!("Root 1 (hex): {:X}", root1);
-            println!("Root 2 (hex): {:X}", root2);
-            println!("\nFlag (larger root in hex): {:X}", flag);
-            println!("\nTo convert to decimal, run:");
-            println!("  python3 -c \"print(int('{:X}', 16))\"", flag);
+            println!("Flag (hex): {:X}", flag);
+
+            // Convert U1024 to BigUint for decimal string representation
+            let flag_bytes = flag.to_be_bytes();
+            let flag_bigint = BigUint::from_bytes_be(&flag_bytes);
+            println!("Flag (decimal): {}", flag_bigint);
+            // println!("  python3 -c \"print(int('{:X}', 16))\"", flag);
         }
         None => {
             println!("No quadratic residue found!");
